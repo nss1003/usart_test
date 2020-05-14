@@ -83,7 +83,6 @@ static void gpio_setup(void)
 }
 
 static volatile char recv[10];
-int count = 0;
 
 static void put_s(char *c)
 {
