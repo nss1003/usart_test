@@ -11,7 +11,8 @@ bin/main.o: main.c /usr/include/newlib/stdio.h \
  /usr/include/newlib/sys/lock.h /usr/include/newlib/sys/types.h \
  /usr/include/newlib/sys/_stdint.h /usr/include/newlib/machine/types.h \
  /usr/include/newlib/sys/stdio.h /usr/include/newlib/stdlib.h \
- /usr/include/newlib/machine/stdlib.h \
+ /usr/include/newlib/machine/stdlib.h /usr/include/newlib/string.h \
+ /usr/include/newlib/sys/string.h \
  ../libopencm3/include/libopencm3/stm32/rcc.h \
  ../libopencm3/include/libopencm3/cm3/common.h \
  /usr/lib/gcc/arm-none-eabi/6.3.1/include/stdint.h \
@@ -31,6 +32,9 @@ bin/main.o: main.c /usr/include/newlib/stdio.h \
  ../libopencm3/include/libopencm3/stm32/l4/usart.h \
  ../libopencm3/include/libopencm3/stm32/common/usart_common_all.h \
  ../libopencm3/include/libopencm3/stm32/common/usart_common_v2.h \
+ ../libopencm3/include/libopencm3/cm3/nvic.h \
+ ../libopencm3/include/libopencm3/dispatch/nvic.h \
+ ../libopencm3/include/libopencm3/stm32/l4/nvic.h \
  ../libopencm3/include/libopencm3/stm32/flash.h \
  ../libopencm3/include/libopencm3/stm32/l4/flash.h \
  ../libopencm3/include/libopencm3/stm32/common/flash_common_all.h \
