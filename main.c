@@ -95,30 +95,30 @@ static void put_s(char *c)
 void uart4_isr(void)
 {
 	int i;
+	//gpio_toggle(GPIOB, GPIO14);
 	if(usart_get_flag(UART4, USART_ISR_RXNE)){
 		for(i = 0; i < 6; i++){
 			recv[i] = usart_recv_blocking(UART4);
-			count = i;
 		}
-
 		gpio_toggle(GPIOB, GPIO14);
-		//put_s(recv);
 	}
 }
 
 int main(void)
 {
 	clock_setup();
+	systick_ms_setup();
 	uart_setup();
 	gpio_setup();
 
 	int i;
+
 	while (1){
+
 		if(recv[5] == '6'){
 			for(i = 0; i < 6; i++)
 				usart_send_blocking(UART4, recv[i]);
 		}
-		msleep(2000);
 	}
 	return 0;
 }
