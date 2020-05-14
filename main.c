@@ -61,7 +61,7 @@ static void uart_setup(void)
 	gpio_set_af(GPIOA, GPIO_AF8, GPIO1);
 
 	//UART4 setup
-	nvic_enable_irq(NVIC_UART4_IRQ);
+	//nvic_enable_irq(NVIC_UART4_IRQ);
 	usart_set_databits(UART4, 8);
 	usart_set_baudrate(UART4, 115200);
 	usart_set_stopbits(UART4, USART_STOPBITS_1);
@@ -70,7 +70,7 @@ static void uart_setup(void)
 	usart_set_flow_control(UART4, USART_FLOWCONTROL_NONE);
 
 	/*Enable RX interrupt*/
-	usart_enable_rx_interrupt(UART4);
+	//usart_enable_rx_interrupt(UART4);
 
 	/* Finally enable USART3. */
 	usart_enable(UART4);
@@ -91,18 +91,18 @@ static void put_s(char *c)
 		c++;
 	}
 }
-
-void uart4_isr(void)
-{
-	int i;
-	//gpio_toggle(GPIOB, GPIO14);
-	if(usart_get_flag(UART4, USART_ISR_RXNE)){
-		for(i = 0; i < 6; i++){
-			recv[i] = usart_recv_blocking(UART4);
-		}
-		gpio_toggle(GPIOB, GPIO14);
-	}
-}
+// works also without interrupt
+//void uart4_isr(void)
+//{
+//	int i;
+//	//gpio_toggle(GPIOB, GPIO14);
+//	if(usart_get_flag(UART4, USART_ISR_RXNE)){
+//		for(i = 0; i < 6; i++){
+//			recv[i] = usart_recv_blocking(UART4);
+//		}
+//		gpio_toggle(GPIOB, GPIO14);
+//	}
+//}
 
 int main(void)
 {
@@ -114,6 +114,13 @@ int main(void)
 	int i;
 
 	while (1){
+
+		if(usart_get_flag(UART4, USART_ISR_RXNE)){
+			for(i = 0; i < 6; i++){
+				recv[i] = usart_recv_blocking(UART4);
+			}
+			gpio_toggle(GPIOB, GPIO14);
+		}
 
 		if(recv[5] == '6'){
 			for(i = 0; i < 6; i++)
